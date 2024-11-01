@@ -11,11 +11,13 @@ const AlApiConfig: Schema<AlApiConfig> = Schema.intersect([
 ])
 
 interface AlApiSwitch {
-  zaobao: boolean
+  zaobao: boolean,
+  oil: boolean
 }
 
 const AlApiSwitch: Schema<AlApiSwitch> = Schema.object({
   zaobao: Schema.boolean().description('每日60秒早报').default(false),
+  oil: Schema.boolean().description('今日油价').default(false),
 })
 
 interface AlApiRequestConfig {

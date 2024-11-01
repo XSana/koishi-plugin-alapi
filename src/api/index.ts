@@ -1,8 +1,9 @@
 import {HTTP} from "koishi";
-import {ZaobaoResponse} from "../types/apiTypes";
+import {OilPriceResponse, ZaobaoResponse} from "../types/apiTypes";
 
 const API = {
   zaobao: '/zaobao',
+  oil: '/oil'
 }
 
 export class Api {
@@ -18,6 +19,10 @@ export class Api {
 
   async zaobao(): Promise<ZaobaoResponse> {
     return this.http.post(API.zaobao, this.createRequestBody({format: 'json'}));
+  }
+
+  async oil(): Promise<OilPriceResponse> {
+    return this.http.post(API.oil, this.createRequestBody());
   }
 
   createRequestBody = (extraParams = {}) => {

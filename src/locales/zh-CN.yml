@@ -3,4 +3,5 @@ commands:
     description: ALAPI相关接口功能
   zaobao:
     description: 每日60秒早报
-
+  oil:
+    description: 查询今日油价
