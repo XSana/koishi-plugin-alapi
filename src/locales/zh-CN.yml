@@ -1,0 +1,6 @@
+commands:
+  alapi:
+    description: ALAPI相关接口功能
+  zaobao:
+    description: 每日60秒早报
+
