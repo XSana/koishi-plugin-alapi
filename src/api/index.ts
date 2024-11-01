@@ -1,9 +1,10 @@
 import {HTTP} from "koishi";
-import {OilPriceResponse, ZaobaoResponse} from "../types/apiTypes";
+import {HolidayApiResponse, OilPriceResponse, ZaobaoResponse} from "../types/apiTypes";
 
 const API = {
   zaobao: '/zaobao',
-  oil: '/oil'
+  oil: '/oil',
+  holiday: '/holiday'
 }
 
 export class Api {
@@ -23,6 +24,10 @@ export class Api {
 
   async oil(): Promise<OilPriceResponse> {
     return this.http.post(API.oil, this.createRequestBody());
+  }
+
+  async holiday(year: Number): Promise<HolidayApiResponse> {
+    return this.http.post(API.holiday, this.createRequestBody({year: year}));
   }
 
   createRequestBody = (extraParams = {}) => {
