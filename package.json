@@ -8,15 +8,23 @@
     "lib",
     "dist"
   ],
-  "license": "MIT",
+  "license": "GNU GPLv3",
   "scripts": {},
   "keywords": [
     "chatbot",
     "koishi",
-    "plugin"
+    "plugin",
+    "alapi"
   ],
   "devDependencies": {},
   "peerDependencies": {
     "koishi": "^4.17.11"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/XSana/koishi-plugin-alapi"
+  },
+  "contributors": [
+    "XSana <nico@niconi.cn>"
+  ]
 }
