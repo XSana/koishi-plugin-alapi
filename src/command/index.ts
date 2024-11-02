@@ -1,14 +1,20 @@
-import {Context} from "koishi";
-import {Config} from "../config";
-
-import {AlApi} from "../index";
+import {Config} from "../config"
+import {AlApi} from "../types/alapi"
 
 import * as zaobao from "./zaobao"
 import * as oli from "./oil"
 import * as holiday from "./holiday"
 
-export async function apply(ctx: Context, config: Config, alapi: AlApi) {
-  if (config.zaobao) await zaobao.apply(ctx, alapi)
-  if (config.oil) await oli.apply(ctx, alapi)
-  if (config.holiday) await holiday.apply(ctx, alapi)
+const modules = [
+  {key: "zaobao", module: zaobao},
+  {key: "oil", module: oli},
+  {key: "holiday", module: holiday},
+]
+
+export async function apply(config: Config, alapi: AlApi) {
+  alapi.cmd = alapi.ctx.command("alapi")
+
+  for (const {key, module} of modules) {
+    if (config[key]) await module.apply(alapi)
+  }
 }

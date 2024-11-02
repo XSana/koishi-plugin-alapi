@@ -1,7 +1,7 @@
 {
   "name": "@xsana/koishi-plugin-alapi",
   "description": "ALAPI相关接口实现",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -26,5 +26,8 @@
   },
   "contributors": [
     "XSana <nico@niconi.cn>"
-  ]
+  ],
+  "service": {
+    "required": ["puppeteer"]
+  }
 }

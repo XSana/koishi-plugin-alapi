@@ -1,39 +1,29 @@
-import {Schema, HTTP} from "koishi";
+import {HTTP, Schema} from "koishi"
+import {AlApiConfig, AlApiRequestConfig, AlApiSwitch, Config} from "../types/config";
 
-interface AlApiConfig {
-  alApiToken: string
-}
 
-const AlApiConfig: Schema<AlApiConfig> = Schema.intersect([
-  Schema.object({
-    alApiToken: Schema.string().description('ALAPI Token, 前往 https://www.alapi.cn/ 获取').required(),
-  }),
-])
-
-interface AlApiSwitch {
-  zaobao: boolean,
-  oil: boolean,
-  holiday: boolean
-}
-
-const AlApiSwitch: Schema<AlApiSwitch> = Schema.object({
-  zaobao: Schema.boolean().description('每日60秒早报').default(false),
-  oil: Schema.boolean().description('今日油价').default(false),
-  holiday: Schema.boolean().description('节假日').default(false),
+const alApiConfig: Schema<AlApiConfig> = Schema.object({
+  alApiToken: Schema.string()
+    .required(),
 })
 
-interface AlApiRequestConfig {
-  requestConfig: HTTP.Config
-}
-
-const AlApiRequestConfig: Schema<AlApiRequestConfig> = Schema.object({
-  requestConfig: HTTP.createConfig("https://v2.alapi.cn/api/")
+const alApiSwitch: Schema<AlApiSwitch> = Schema.object({
+  zaobao: Schema.boolean().default(false),
+  oil: Schema.boolean().default(false),
+  holiday: Schema.boolean().default(false),
 })
 
-export type Config = AlApiConfig & AlApiSwitch & AlApiRequestConfig
+const alApiRequestConfig: Schema<AlApiRequestConfig> = Schema.object({
+  requestConfig: HTTP.createConfig("https://v2.alapi.cn/api/"),
+})
 
-export const Config: Schema<Config> = Schema.intersect([
-  AlApiConfig,
-  AlApiSwitch.description('ALAPI 功能开关'),
-  AlApiRequestConfig
-])
+const Config: Schema<Config> = Schema.intersect([
+  alApiConfig,
+  alApiSwitch,
+  alApiRequestConfig,
+]).i18n({
+  'zh-CN': require('../locales/zh-CN')._config,
+})
+
+// 导出 Config 以供外部使用
+export {Config}

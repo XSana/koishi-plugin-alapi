@@ -1,10 +1,7 @@
-import {Context, h} from "koishi";
-import {AlApi} from "../index";
-import {} from 'koishi-plugin-puppeteer'
-import {OilPriceResponse, ProvinceOilPrice} from "../types/apiTypes";
+import {AlApi} from "../types/alapi";
+import {OilPriceResponse, ProvinceOilPrice} from "../types/apiResponse";
 
-
-export async function apply(ctx: Context, alapi: AlApi) {
+export async function apply(alapi: AlApi) {
   // 注册指令
   const subCmd = alapi.cmd.subcommand('oil')
   subCmd.alias("今日油价")
@@ -92,14 +89,14 @@ function generateTable(data: OilPriceResponse) {
             <div class="table-container">
                 <h1>全国油价表格</h1>
                 <p>数据时间戳：${new Date(data.time * 1000).toLocaleString("zh-CN", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  second: "2-digit",
-                  hour12: false,
-                })}</p>
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  })}</p>
                 <table>
                     ${tableHeader}
                     <tbody>

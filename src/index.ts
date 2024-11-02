@@ -1,30 +1,29 @@
-import {Command, Context, Logger} from 'koishi'
-
+import {Context} from 'koishi'
+import {} from 'koishi-plugin-puppeteer'
+import {AlApi} from './types/alapi'
 import {Config} from './config'
-
+import {Api} from './api'
+import {loadLocales} from './locales'
 import * as command from './command'
-import {Api} from "./api";
 
-export interface AlApi {
-  logger: Logger
-  cmd: Command
-  api: Api
-}
-
+export const using = ["puppeteer"] as const
 export {Config}
 
 export const name = 'alapi'
 
 export async function apply(ctx: Context, config: Config) {
 
-  ctx.i18n.define('zh-CN', require('./locales/zh-CN'))
+  // 读取语言配置
+  loadLocales(ctx)
 
-  const cmd = ctx.command('alapi')
-
+  // 初始化alapi
   const alapi: AlApi = {
     logger: ctx.logger('alapi'),
-    cmd: cmd,
     api: new Api(ctx.http.extend(config.requestConfig), config.alApiToken),
+    ctx: ctx,
+    cmd: null,
   }
-  await command.apply(ctx, config, alapi);
+
+  // 载入指令
+  await command.apply(config, alapi);
 }

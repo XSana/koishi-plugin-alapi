@@ -1,9 +1,7 @@
-import {Context, h} from "koishi";
-import {AlApi} from "../index";
-import {} from 'koishi-plugin-puppeteer'
-import {HolidayApiResponse} from "../types/apiTypes";
+import {AlApi} from "../types/alapi";
+import {HolidayApiResponse} from "../types/apiResponse";
 
-export async function apply(ctx: Context, alapi: AlApi) {
+export async function apply(alapi: AlApi) {
   // 注册指令
   const subCmd = alapi.cmd.subcommand('holiday')
   subCmd.alias("节假日")

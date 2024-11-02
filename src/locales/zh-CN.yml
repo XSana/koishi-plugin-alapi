@@ -7,3 +7,19 @@ commands:
     description: 查询今日油价
   holiday:
     description: 查询当年节假日
+
+_config:
+  - $desc: 基本信息配置
+    alApiToken: ALAPI Token, 前往 https://www.alapi.cn/ 获取
+  - $desc: ALAPI 功能开关
+    zaobao: 每日60秒早报
+    oil: 今日油价
+    holiday: 节假日
+  - $desc: 请求配置
+    requestConfig: &requestConfig
+      endpoint: 请求api地址。
+      headers: 要附加的额外请求头。
+      timeout: 等待连接建立的最长时间。
+      keepAlive: 是否保持连接。
+      proxyAgent: 使用的代理服务器地址。
+

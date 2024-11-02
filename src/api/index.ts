@@ -1,5 +1,5 @@
 import {HTTP} from "koishi";
-import {HolidayApiResponse, OilPriceResponse, ZaobaoResponse} from "../types/apiTypes";
+import {HolidayApiResponse, OilPriceResponse, ZaobaoResponse} from "../types/apiResponse";
 
 const API = {
   zaobao: '/zaobao',

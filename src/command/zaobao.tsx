@@ -1,7 +1,7 @@
-import {Context, h} from "koishi";
-import {AlApi} from "../index";
+import {h} from "koishi";
+import {AlApi} from "../types/alapi";
 
-export async function apply(ctx: Context, alapi: AlApi) {
+export async function apply(alapi: AlApi) {
   // 注册指令
   const subCmd = alapi.cmd.subcommand('zaobao')
   subCmd.alias("今日早报")
