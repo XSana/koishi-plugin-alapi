@@ -10,6 +10,7 @@ export interface AlApiSwitch {
   zaobao: boolean
   oil: boolean
   holiday: boolean
+  exchange: boolean
 }
 
 // ALAPI 请求配置

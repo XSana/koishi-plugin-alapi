@@ -4,11 +4,13 @@ import {AlApi} from "../types/alapi"
 import * as zaobao from "./zaobao"
 import * as oli from "./oil"
 import * as holiday from "./holiday"
+import * as exchange from "./exchange"
 
 const modules = [
   {key: "zaobao", module: zaobao},
   {key: "oil", module: oli},
   {key: "holiday", module: holiday},
+  {key: "exchange", module: exchange},
 ]
 
 export async function apply(config: Config, alapi: AlApi) {

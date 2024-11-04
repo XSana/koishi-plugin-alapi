@@ -43,10 +43,28 @@ export interface Holiday {
 }
 
 // 节假日接口返回的主要结构
-export interface HolidayApiResponse {
+export interface HolidayResponse {
   code: number;
   msg: string;
   data: Holiday[];
+  time: number;
+  usage: number;
+  log_id: string;
+}
+
+export interface ExchangeResponse {
+  code: number;
+  msg: string;
+  data: {
+    exchange: number;
+    exchange_round: number;
+    currency_money: number;
+    currency_form: string;
+    currency_form_name: string;
+    currency_to: string;
+    currency_to_name: string;
+    update_time: string;
+  };
   time: number;
   usage: number;
   log_id: string;

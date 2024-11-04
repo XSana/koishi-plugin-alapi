@@ -7,6 +7,12 @@ commands:
     description: 查询今日油价
   holiday:
     description: 查询当年节假日
+  exchange:
+    description: 汇率查询
+    examples: |-
+      exchange 100 USD CNY
+  exchange.code:
+    description: 常用货币代码查询
 
 _config:
   - $desc: 基本信息配置
@@ -15,6 +21,7 @@ _config:
     zaobao: 每日60秒早报
     oil: 今日油价
     holiday: 节假日
+    exchange: 汇率查询
   - $desc: 请求配置
     requestConfig: &requestConfig
       endpoint: 请求api地址。

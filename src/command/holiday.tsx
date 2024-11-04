@@ -1,5 +1,5 @@
 import {AlApi} from "../types/alapi";
-import {HolidayApiResponse} from "../types/apiResponse";
+import {HolidayResponse} from "../types/apiResponse";
 
 export async function apply(alapi: AlApi) {
   // 注册指令
@@ -23,7 +23,7 @@ export async function apply(alapi: AlApi) {
   })
 }
 
-const generateMessage = (data: HolidayApiResponse) => {
+const generateMessage = (data: HolidayResponse) => {
   // 获取当前日期
   const today = new Date().toISOString().slice(0, 10);
   const currentYear = new Date().getFullYear();

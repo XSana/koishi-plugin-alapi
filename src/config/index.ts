@@ -11,6 +11,7 @@ const alApiSwitch: Schema<AlApiSwitch> = Schema.object({
   zaobao: Schema.boolean().default(false),
   oil: Schema.boolean().default(false),
   holiday: Schema.boolean().default(false),
+  exchange: Schema.boolean().default(false),
 })
 
 const alApiRequestConfig: Schema<AlApiRequestConfig> = Schema.object({
