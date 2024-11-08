@@ -11,6 +11,7 @@ export interface AlApiSwitch {
   oil: boolean
   holiday: boolean
   exchange: boolean
+  weatherSeven: boolean
 }
 
 // ALAPI 请求配置

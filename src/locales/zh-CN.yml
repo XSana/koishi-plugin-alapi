@@ -37,6 +37,15 @@ commands:
         NZD：新西兰元，新西兰
         HKD：港币，香港
         CNY：人民币，中国
+  weather:
+    description: 查询七日天气
+    examples: |-
+      weather 北京
+      天气 北京
+      北京天气
+    messages:
+      city_mismatch: 查询失败，没有找到对应城市的天气信息。
+      failed: 天气信息获取失败，请稍后重试。
 
 _config:
   - $desc: 基本信息配置

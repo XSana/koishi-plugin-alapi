@@ -1,11 +1,18 @@
 import {HTTP} from "koishi";
-import {ExchangeResponse, HolidayResponse, OilPriceResponse, ZaobaoResponse} from "../types/apiResponse";
+import {
+  ExchangeResponse,
+  HolidayResponse,
+  OilPriceResponse,
+  WeatherSevenResponse,
+  ZaobaoResponse
+} from "../types/apiResponse";
 
 const API = {
   zaobao: '/zaobao',
   oil: '/oil',
   holiday: '/holiday',
   exchange: '/exchange',
+  weatherSeven: '/tianqi/seven',
 }
 
 export class Api {
@@ -33,6 +40,10 @@ export class Api {
 
   async exchange(money: number, from: string, to: string): Promise<ExchangeResponse> {
     return this.http.post(API.exchange, this.createRequestBody({money: money, from: from, to: to}));
+  }
+
+  async weatherSeven(city: string): Promise<WeatherSevenResponse> {
+    return this.http.post(API.weatherSeven, this.createRequestBody({city: city}));
   }
 
   createRequestBody = (extraParams = {}) => {
