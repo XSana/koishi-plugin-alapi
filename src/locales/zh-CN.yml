@@ -3,16 +3,40 @@ commands:
     description: ALAPI相关接口功能
   zaobao:
     description: 每日60秒早报
+    messages:
+      failed: 今日早报获取失败，请稍后再试。
   oil:
     description: 查询今日油价
+    messages:
+      failed: 今日油价获取失败，请稍后重试。
   holiday:
     description: 查询当年节假日
+    messages:
+      failed: 节假日信息获取失败，请稍后重试。
   exchange:
     description: 汇率查询
     examples: |-
       exchange 100 USD CNY
+    messages:
+      success: 兑换结果：{0} {1} = {2} {3}。
+      invalid_amount: 请输入正确的金额。
+      same_currency: 请不要输入相同的货币。
+      failed: 汇率信息获取失败，请稍后重试。
   exchange.code:
     description: 常用货币代码查询
+    messages:
+      text: |-
+        常用货币代码：
+        USD：美元，美国
+        EUR：欧元，欧洲联盟
+        JPY：日元，日本
+        GBP：英镑，英国
+        CHF：瑞士法郎，瑞士
+        AUD：澳大利亚元，澳大利亚
+        CAD：加拿大元，加拿大
+        NZD：新西兰元，新西兰
+        HKD：港币，香港
+        CNY：人民币，中国
 
 _config:
   - $desc: 基本信息配置
@@ -29,4 +53,3 @@ _config:
       timeout: 等待连接建立的最长时间。
       keepAlive: 是否保持连接。
       proxyAgent: 使用的代理服务器地址。
-

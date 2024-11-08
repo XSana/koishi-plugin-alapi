@@ -3,25 +3,28 @@ import {AlApi} from "../types/alapi";
 
 export async function apply(alapi: AlApi) {
   // 注册指令
-  const subCmd = alapi.cmd.subcommand('zaobao')
-  subCmd.alias("今日早报")
-  subCmd.alias("早报")
+  const subCmd = alapi.cmd.subcommand("zaobao");
+  subCmd.alias("今日早报");
+  subCmd.alias("早报");
 
   // 指令事件
-  subCmd.action(async (_) => {
+  subCmd.action(async ({session}) => {
     try {
+      // 获取早报数据
       const data = await alapi.api.zaobao();
       if (data.code === 200) {
-        // return generateMessage(data)
-        return h('img', {src: data.data.image})
+        // 返回早报图片
+        return h("img", {src: data.data.image});
       } else {
-        alapi.logger.error(`今日早报获取失败：${data.msg}\nResponseData:${JSON.stringify(data)}`)
+        // 记录获取失败的日志
+        alapi.logger.warn(`zaobao：${data.msg}\nResponseData: ${JSON.stringify(data)}`);
       }
     } catch (err) {
-      alapi.logger.error(`今日早报获取失败：${err}`)
+      // 捕获异常并记录
+      alapi.logger.error(`zaobao：${err}`);
     }
-    return "今日早报获取失败";
-  })
+    return session.text(".failed");
+  });
 }
 
 // const generateMessage = (data: ZaobaoResponse) => {

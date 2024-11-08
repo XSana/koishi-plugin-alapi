@@ -1,7 +1,6 @@
 import {HTTP, Schema} from "koishi"
 import {AlApiConfig, AlApiRequestConfig, AlApiSwitch, Config} from "../types/config";
 
-
 const alApiConfig: Schema<AlApiConfig> = Schema.object({
   alApiToken: Schema.string()
     .required(),
