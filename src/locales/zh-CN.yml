@@ -55,6 +55,7 @@ _config:
     oil: 今日油价
     holiday: 节假日
     exchange: 汇率查询
+    weatherSeven: 七日天气
   - $desc: 请求配置
     requestConfig: &requestConfig
       endpoint: 请求api地址。
