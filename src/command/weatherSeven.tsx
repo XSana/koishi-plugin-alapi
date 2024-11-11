@@ -1,5 +1,5 @@
 import {AlApi} from "../types/alapi";
-import {CityWeather, OilPriceResponse, ProvinceOilPrice} from "../types/apiResponse";
+import {CityWeather} from "../types/apiResponse";
 
 export async function apply(alapi: AlApi) {
 
@@ -49,7 +49,7 @@ function generateWeatherPage(weekWeather: CityWeather[]): string {
 
   const cityInfo = `
     <div class="city_info">
-      <h3>${city}</h3>
+      <h2>${city}</h2>
       <p>${todayWeather.hour[0].temp}°</p>
       <div class="temperature_range">
         <div class="left">
@@ -69,8 +69,10 @@ function generateWeatherPage(weekWeather: CityWeather[]): string {
   const now = new Date();
   let futureHourWeather = todayWeather.hour.filter(h => new Date(h.time) >= now);
 
+  // 如果当前天的小时数据多余8小时，则取前8条
+  if (futureHourWeather.length > 8) futureHourWeather = futureHourWeather.slice(0, 8)
   // 如果当前天的小时数据不足8小时，从第二天数据补足
-  if (futureHourWeather.length < 8 && weekWeather[1]) {
+  else if (futureHourWeather.length < 8 && weekWeather[1]) {
     futureHourWeather = [
       ...futureHourWeather,
       ...weekWeather[1].hour.slice(0, 8 - futureHourWeather.length),
@@ -146,7 +148,7 @@ function generateWeatherPage(weekWeather: CityWeather[]): string {
           padding: 10px 0;
         }
 
-        .city_info h3 {
+        .city_info h2 {
           margin-top: 0;
           margin-bottom: 5px;
         }
@@ -169,6 +171,8 @@ function generateWeatherPage(weekWeather: CityWeather[]): string {
         .city_info .temperature_range .text {
           writing-mode: vertical-lr;
           text-orientation: upright;
+          padding: 2px 4px 0 0;
+          float: left;
         }
 
         .city_info .temperature_range .temperature {
@@ -185,15 +189,6 @@ function generateWeatherPage(weekWeather: CityWeather[]): string {
           border-radius: 12px;
         }
 
-        .house_weather .title {
-          font-size: 12px;
-          padding: 5px 0 5px 10px;
-          width: 100%; /* 使标题与 .house_weather 对齐 */
-          text-align: left; /* 文字左对齐 */
-          border-bottom: 1px solid #dddddd6b; /* 添加下边框 */
-          box-sizing: border-box; /* 包含内边距以确保对齐 */
-        }
-
         .house_weather .house_row {
           display: flex; /* 将 house_item 横向排列 */
           width: 100%; /* 占据父级宽度 */
@@ -207,6 +202,9 @@ function generateWeatherPage(weekWeather: CityWeather[]): string {
           margin: 5px; /* 为每个 house_item 添加间距 */
         }
 
+        .house_weather .house_row .house_item .temp {
+          padding: 4px 0 0 0;
+        }
 
         .week_weather {
           margin-top: 10px;
@@ -217,15 +215,6 @@ function generateWeatherPage(weekWeather: CityWeather[]): string {
           border-radius: 12px;
           width: 100%; /* 使 week_weather 占满父级宽度 */
           padding: 5px 10px;
-          box-sizing: border-box;
-        }
-
-        .week_weather .title {
-          font-size: 12px;
-          padding: 5px 0 5px 10px;
-          width: 100%;
-          text-align: left;
-          border-bottom: 1px solid #dddddd6b;
           box-sizing: border-box;
         }
 
@@ -257,17 +246,10 @@ function generateWeatherPage(weekWeather: CityWeather[]): string {
           box-sizing: border-box;
         }
 
-        .life_index .title {
-          font-size: 12px;
-          text-align: left;
-          padding: 5px 0;
-          border-bottom: 1px solid #dddddd6b;
-        }
-
         .life_index .index_row {
           display: flex;
           justify-content: space-between;
-          padding: 5px 0;
+          padding: 5px 12px;
           border-bottom: 1px solid #dddddd6b;
         }
 
@@ -278,6 +260,15 @@ function generateWeatherPage(weekWeather: CityWeather[]): string {
         /* 边框内内容半透明背景 */
         .house_weather, .week_weather, .life_index {
           background-color: rgba(0, 0, 0, 0.5); /* 半透明黑灰色 */
+        }
+
+        .title {
+          font-size: 12px;
+          padding: 5px 0 5px 10px;
+          width: 100%;
+          text-align: left;
+          border-bottom: 1px solid #dddddd6b;
+          box-sizing: border-box;
         }
       </style>
     </head>
