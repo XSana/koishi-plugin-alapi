@@ -5,7 +5,7 @@ export async function apply(alapi: AlApi) {
 
   alapi.ctx.on("message", async (session) => {
     // 匹配xxx天气
-    const weatherReg = /(.+)天气/;
+    const weatherReg = /^(.+)天气$/;
     const match = session.content.match(weatherReg);
     if (match) session.execute(`weather ${match[1]}`);
   })
